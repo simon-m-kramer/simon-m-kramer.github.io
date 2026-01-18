@@ -1,29 +1,11 @@
-body{
+
+/* Base */
+body {
     padding-top: 56px;
-    /* padding-bottom: 156px */
 }
 
-.custom-box{
-    height: 350px;
-}
 
-.about-box{
-    padding-top: 2.5%;
-    padding-bottom: 40%;
-    padding-left: 7.5%;
-    padding-right: 7.5%;
-    margin-left: 10%;
-    margin-right: 10%;
-}
 
-.custom-footer{
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-.hero-box{
-    height: 450px;
-}
 
 /* Remove the focus outline from the navbar toggler */
 .navbar-toggler:focus {
@@ -161,23 +143,6 @@ html {
 .operator { color: #2c2c2c; }                        /* Dark gray for operators */
 .number { color: #09885a; }                          /* Darker teal for numbers */
 
-
-@media (min-width: 768px) {
-    .px-md-6 {
-        padding-left: 5rem !important;
-        padding-right: 5rem !important;
-    }
-    
-    .px-md-7 {
-        padding-left: 7rem !important;
-        padding-right: 7rem !important;
-    }
-
-    .pe-md-6 {
-        padding-right: 9rem !important;
-    }
-
-}
 
 .code-collapse.collapsing {
     transition: none !important;
