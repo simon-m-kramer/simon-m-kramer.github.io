@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-ghcolors.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Simon Kramer</title>
 </head>
-
 
 
 
@@ -89,20 +89,20 @@
                         </button>
                         <div class="collapse code-collapse mt-3" id="codeSnippet">
                             <div class="code-example">
-<pre><code><span class="comment">// Smoothly apply recoil displacement over the step time</span>
-<span class="keyword">private</span> <span class="keyword">void</span> <span class="method">PlaybackRecoil</span>()
-{
-    <span class="keyword">if</span> (recoilTimer <span class="operator">&gt;</span> <span class="number">0</span>)
-    {
-        CinemachineOrbitalFollow.<span class="property">VerticalAxis</span>.<span class="property">Value</span> <span class="operator">-=</span>
-        (verticalRecoil <span class="operator">*</span> patternScale.y <span class="operator">*</span> Time.deltaTime) <span class="operator">/</span> recoilStepTime;
-        
-        CinemachineOrbitalFollow.<span class="property">HorizontalAxis</span>.<span class="property">Value</span> <span class="operator">-=</span>
-        (horizontalRecoil <span class="operator">*</span> patternScale.x <span class="operator">*</span> Time.deltaTime) <span class="operator">/</span> recoilStepTime;
-        
-        recoilTimer <span class="operator">-=</span> Time.deltaTime;
-    }
-}</code></pre>
+                                <pre><code class="language-csharp">
+                                private void PlaybackRecoil()
+                                {
+                                    if (recoilTimer > 0)
+                                    {
+                                        CinemachineOrbitalFollow.VerticalAxis.Value -=
+                                        (verticalRecoil * patternScale.y * Time.deltaTime) / recoilStepTime;
+                                        
+                                        CinemachineOrbitalFollow.HorizontalAxis.Value -=
+                                        (horizontalRecoil * patternScale.x * Time.deltaTime) / recoilStepTime;
+                                        
+                                        recoilTimer -= Time.deltaTime;
+                                    }
+                                }</code></pre>
                             </div>
                         </div>
                     </div>
@@ -176,6 +176,12 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous">
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+
 
     <!-- Custom JavaScript -->
     <script src="script.js"></script>

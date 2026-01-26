@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-ghcolors.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Simon Kramer | Feature</title>
+    <title>Simon Kramer</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100" style="background-color: #f5f3ed;">
@@ -53,678 +54,668 @@
     <!-- Main -->
     <main class="flex-grow-1">
 
-            <div class="container-fluid px-3" style="max-width: 768px;">
-
-                <!-- Page Header -->
-                <div class="mb-5 pt-4">
-                    <h1 class="display-4 fw-semibold mb-3">Souls-like Viking RPG</h1>
-                    <p class="lead fs-5">
-                    This page documents my combat system built with the Gameplay Ability System (GAS),
-                    covering attributes, Gameplay Effects, animation systems,
-                    and the state-driven logic behind responsive Souls-like combat.
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                    </svg>
-                    <a href="index.html" class="text-decoration-none text-dark back-to-portfolio-link">Back to Portfolio</a>
-                </div>
-                <!-- <hr class="my-5"> -->
-
-                <div id="GAS" class="mb-5">
-                    <video class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                        <source src="videos/Asgard_video3.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="pt-4">
-                        <h2 class="h3 mb-3 fw-bold">Gameplay Ability System (GAS)</h2>
-                        <div class="fs-6">
-                            <p>
-                                While GAS requires considerable boilerplate code, once set up it becomes quite convenient to work with.
-                                My base GAS setup is built on four GAS-specific classes
-                                (using "Thor" as the project prefix, following standard naming conventions):
-                            </p>
-                            <ul>
-                                <li>ThorAbilityInputID</li>
-                                <li>ThorAbilitySystemComponent</li>
-                                <li>ThorAttributeSet</li>
-                                <li>ThorGameplayAbility</li>
-                            </ul>
-                            <p>
-                                These four classes can be surprisingly minimal.
-                                ThorAbilityInputID is simply an enumeration.
-                                ThorGameplayAbility, the base class for all gameplay abilities,
-                                implements only a single property: the aforementioned ability input ID.
-                                ThorAbilitySystemComponent doesn't require any implementation to get started.
-                                GAS also relies on Gameplay Tags, which prove useful for all kinds of implementations beyond GAS itself.
-                            </p>
-
-                            <div class="mb-4">
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAbilityInputID" aria-expanded="false" aria-controls="codeSnippetAbilityInputID">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-        </svg>
-        View Code
-    </button>
-    <div class="collapse code-collapse mt-3" id="codeSnippetAbilityInputID">
-        <div class="code-example">
-<pre><code><span class="method">UENUM</span>(BlueprintType)
-<span class="keyword">enum class</span> EThorAbilityInputID : uint8
-{
-    None = <span class="number">0</span>,
-    Confirm,
-    Cancel,
-    Roll,
-    LightAttack,
-    MediumAttack,
-    HeavyAttack,
-    Block,
-    UseItem
-};
-
-<span class="method">UCLASS</span>()
-<span class="keyword">class</span> THUNDERSTORM_API UThorGameplayAbility : <span class="keyword">public</span> UGameplayAbility
-{
-    <span class="method">GENERATED_BODY</span>()
-
-<span class="keyword">public</span>:
-    UThorGameplayAbility::<span class="method">UThorGameplayAbility</span>();
-
-    <span class="method">UPROPERTY</span>(EditDefaultsOnly, Category = <span class="string">"Input"</span>)
-    EThorAbilityInputID AbilityInputID = EThorAbilityInputID::None;
-};</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                            <h5> Attribute Set</h5>
-                            <p>
-                                GAS provides macros for setting up attributes. For my souls-like game, I use just four:
-                            </p>
-                            <ul>
-                                <li>Health</li>
-                                <li>MaxHealth</li>
-                                <li>Stamina</li>
-                                <li>MaxStamina</li>
-                            </ul>
-                            <p>
-                                One aspect that requires attention is proper clamping of these attributes.
-                                This happens in two places: PreAttributeChange clamps the value before it's queried, ensuring valid reads.
-                                PostGameplayEffectExecute clamps the actual base value after a gameplay effect is applied.
-                            </p>
-
-                            <div class="mb-4">
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttributeSet" aria-expanded="false" aria-controls="codeSnippetAttributeSet">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-        </svg>
-        View Code
-    </button>
-    <div class="collapse code-collapse mt-3" id="codeSnippetAttributeSet">
-        <div class="code-example">
-<pre><code><span class="keyword">void</span> UThorAttributeSet::<span class="method">GetLifetimeReplicatedProps</span>(TArray&lt;FLifetimeProperty&gt;&amp; OutLifetimeProps) <span class="keyword">const</span>
-{
-    Super::<span class="method">GetLifetimeReplicatedProps</span>(OutLifetimeProps);
-
-    <span class="method">DOREPLIFETIME_CONDITION_NOTIFY</span>(UThorAttributeSet, Health, COND_None, REPNOTIFY_Always);
-    <span class="method">DOREPLIFETIME_CONDITION_NOTIFY</span>(UThorAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
-    <span class="method">DOREPLIFETIME_CONDITION_NOTIFY</span>(UThorAttributeSet, Stamina, COND_None, REPNOTIFY_Always);
-    <span class="method">DOREPLIFETIME_CONDITION_NOTIFY</span>(UThorAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">PreAttributeChange</span>(<span class="keyword">const</span> FGameplayAttribute&amp; Attribute, <span class="keyword">float</span>&amp; NewValue)
-{
-    Super::<span class="method">PreAttributeChange</span>(Attribute, NewValue);
-
-    <span class="keyword">if</span> (Attribute == <span class="method">GetHealthAttribute</span>())
-    {
-        NewValue = FMath::<span class="method">Clamp</span>(NewValue, <span class="number">0.f</span>, <span class="method">GetMaxHealth</span>());
-    }
-    <span class="keyword">else if</span> (Attribute == <span class="method">GetStaminaAttribute</span>())
-    {
-        NewValue = FMath::<span class="method">Clamp</span>(NewValue, <span class="number">0.f</span>, <span class="method">GetMaxStamina</span>());
-    }
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">PostGameplayEffectExecute</span>(<span class="keyword">const</span> FGameplayEffectModCallbackData&amp; Data)
-{
-    Super::<span class="method">PostGameplayEffectExecute</span>(Data);
-
-    <span class="keyword">if</span> (Data.EvaluatedData.Attribute == <span class="method">GetHealthAttribute</span>())
-    {
-        <span class="method">SetHealth</span>(FMath::<span class="method">Clamp</span>(<span class="method">GetHealth</span>(), <span class="number">0.f</span>, <span class="method">GetMaxHealth</span>()));
-
-        <span class="keyword">if</span> (<span class="method">GetHealth</span>() &lt;= <span class="number">0.f</span>)
-        {
-            <span class="keyword">if</span> (AThorCharacter* Character = Cast&lt;AThorCharacter&gt;(<span class="method">GetOwningActor</span>()))
-            {
-                Character-&gt;<span class="method">OnHealthDepleted</span>();
-            }
-        }
-    }
-    <span class="keyword">else if</span> (Data.EvaluatedData.Attribute == <span class="method">GetStaminaAttribute</span>())
-    {
-        <span class="method">SetStamina</span>(FMath::<span class="method">Clamp</span>(<span class="method">GetStamina</span>(), <span class="number">0.f</span>, <span class="method">GetMaxStamina</span>()));
-    }
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">OnRep_Health</span>(<span class="keyword">const</span> FGameplayAttributeData&amp; OldHealth)
-{
-    <span class="method">GAMEPLAYATTRIBUTE_REPNOTIFY</span>(UThorAttributeSet, Health, OldHealth);
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">OnRep_MaxHealth</span>(<span class="keyword">const</span> FGameplayAttributeData&amp; OldMaxHealth)
-{
-    <span class="method">GAMEPLAYATTRIBUTE_REPNOTIFY</span>(UThorAttributeSet, MaxHealth, OldMaxHealth);
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">OnRep_Stamina</span>(<span class="keyword">const</span> FGameplayAttributeData&amp; OldStamina)
-{
-    <span class="method">GAMEPLAYATTRIBUTE_REPNOTIFY</span>(UThorAttributeSet, Stamina, OldStamina);
-}
-
-<span class="keyword">void</span> UThorAttributeSet::<span class="method">OnRep_MaxStamina</span>(<span class="keyword">const</span> FGameplayAttributeData&amp; OldMaxStamina)
-{
-    <span class="method">GAMEPLAYATTRIBUTE_REPNOTIFY</span>(UThorAttributeSet, MaxStamina, OldMaxStamina);
-}</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                            <h5>Base Character implementing GAS interface</h5>
-                            <p>
-                                ThorCharacter, the base class for all my character classes, implements the GAS interface.
-                                ThorPlayerCharacter, which inherits from ThorCharacter,
-                                sets up the input bindings for GAS using ThorAbilityInputID.
-                            </p>
-                            <p>
-                                One of GAS's key advantages is that it's built with multiplayer in mind.
-                                For a proper multiplayer setup, we need to separate client-side and server-side initialization.
-                                There are two options: initialize in the player controller class (ThorPlayerController)
-                                or in the character class (ThorCharacter).
-                                I chose the character class approach, which involves less cross-referencing.
-                                Server-side initialization happens in PossessedBy,
-                                while client-side initialization occurs in OnRep_PlayerState.
-                                Both need to initialize ability actor info, but only the server should grant default abilities and effects.
-                                We also bind callback functions to GAS delegates in both functions.
-                            </p>
-                            <p>
-                                For my souls-like game's health and stamina attributes, GAS allows binding to attribute changes—useful
-                                for displaying health and stamina in the UI.
-                                I set up custom OnHealthChange and OnStaminaChange delegates
-                                on ThorCharacter and tie them to their respective GAS delegates.
-                            </p>
-
-                            <div class="mb-4">
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCharacter" aria-expanded="false" aria-controls="codeSnippetCharacter">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-        </svg>
-        View Code
-    </button>
-    <div class="collapse code-collapse mt-3" id="codeSnippetCharacter">
-        <div class="code-example">
-<pre><code><span class="keyword">void</span> AThorCharacter::<span class="method">PossessedBy</span>(AController* NewController)
-{
-    Super::<span class="method">PossessedBy</span>(NewController);
-
-    <span class="comment">// Server-side initialization</span>
-    <span class="keyword">if</span> (AbilitySystemComponent)
-    {
-        AbilitySystemComponent-&gt;<span class="method">InitAbilityActorInfo</span>(<span class="keyword">this</span>, <span class="keyword">this</span>);
-        <span class="method">InitializeAttributes</span>();
-        <span class="method">GrantDefaultAbilities</span>();
-        <span class="method">ApplyDefaultEffects</span>();
-        <span class="method">BindToAttributeChanges</span>();
-        <span class="method">BroadcastInitialValues</span>();
-    }
-}
-
-<span class="keyword">void</span> AThorCharacter::<span class="method">OnRep_PlayerState</span>()
-{
-    Super::<span class="method">OnRep_PlayerState</span>();
-
-    <span class="comment">// Client-side initialization</span>
-    <span class="keyword">if</span> (AbilitySystemComponent)
-    {
-        AbilitySystemComponent-&gt;<span class="method">InitAbilityActorInfo</span>(<span class="keyword">this</span>, <span class="keyword">this</span>);
-        <span class="method">BindToAttributeChanges</span>();
-        <span class="method">BroadcastInitialValues</span>();
-    }
-}
-
-<span class="keyword">void</span> AThorCharacter::<span class="method">GrantDefaultAbilities</span>()
-{
-    <span class="keyword">if</span> (!AbilitySystemComponent || !<span class="method">HasAuthority</span>()) <span class="keyword">return</span>;
-
-    <span class="keyword">for</span> (<span class="keyword">const</span> TSubclassOf&lt;UThorGameplayAbility&gt;&amp; AbilityClass : DefaultAbilities)
-    {
-        <span class="keyword">if</span> (!AbilityClass) <span class="keyword">continue</span>;
-
-        <span class="keyword">const</span> UThorGameplayAbility* AbilityCDO = AbilityClass.<span class="method">GetDefaultObject</span>();
-        FGameplayAbilitySpec Spec(
-            AbilityClass,
-            <span class="number">1</span>,
-            <span class="keyword">static_cast</span>&lt;<span class="keyword">int32</span>&gt;(AbilityCDO-&gt;AbilityInputID),
-            <span class="keyword">this</span>
-        );
-
-        AbilitySystemComponent-&gt;<span class="method">GiveAbility</span>(Spec);
-    }
-}
-
-<span class="keyword">void</span> AThorCharacter::<span class="method">BindToAttributeChanges</span>()
-{
-    <span class="keyword">if</span> (AbilitySystemComponent)
-    {
-        AbilitySystemComponent-&gt;<span class="method">GetGameplayAttributeValueChangeDelegate</span>(UThorAttributeSet::<span class="method">GetHealthAttribute</span>())
-            .<span class="method">AddUObject</span>(<span class="keyword">this</span>, &amp;AThorCharacter::HandleHealthChanged);
-
-        AbilitySystemComponent-&gt;<span class="method">GetGameplayAttributeValueChangeDelegate</span>(UThorAttributeSet::<span class="method">GetStaminaAttribute</span>())
-            .<span class="method">AddUObject</span>(<span class="keyword">this</span>, &amp;AThorCharacter::HandleStaminaChanged);
-    }
-}</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                            <h5>Player Character processing GAS Input ID</h5>
-                            <p>
-                                ThorPlayerCharacter is primarily responsible for input setup.
-                                For GAS, there are two approaches to handling input:
-                                TryActivateAbility and AbilityLocalInputPressed / AbilityLocalInputReleased.
-                                I opted for TryActivateAbility.
-                                During development, I found that AbilityLocalInputPressed doesn't recognize retriggered inputs,
-                                which prevented animation canceling from working.
-                                TryActivateAbility, on the other hand, handles this correctly.
-                            </p>
-
-                            <div class="mb-4">
-<button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetPlayerCharacter" aria-expanded="false" aria-controls="codeSnippetPlayerCharacter">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-        <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-    </svg>
-    View Code
-</button>
-<div class="collapse code-collapse mt-3" id="codeSnippetPlayerCharacter">
-    <div class="code-example">
-<pre><code><span class="keyword">void</span> AThorPlayerCharacter::<span class="method">OnAbilityInputPressed</span>(EThorAbilityInputID InputID)
-{
-    <span class="keyword">if</span> (AbilitySystemComponent)
-    {
-        FGameplayAbilitySpec* Spec = AbilitySystemComponent-&gt;<span class="method">FindAbilitySpecFromInputID</span>(
-            <span class="keyword">static_cast</span>&lt;<span class="keyword">int32</span>&gt;(InputID)
-        );
-
-        <span class="keyword">if</span> (Spec)
-        {
-            AbilitySystemComponent-&gt;<span class="method">TryActivateAbility</span>(Spec-&gt;Handle);
-        }
-    }
-}
-
-<span class="keyword">void</span> AThorPlayerCharacter::<span class="method">OnAbilityInputReleased</span>(EThorAbilityInputID InputID)
-{
-    <span class="keyword">if</span> (AbilitySystemComponent)
-    {
-        AbilitySystemComponent-&gt;<span class="method">AbilityLocalInputReleased</span>(<span class="keyword">static_cast</span>&lt;<span class="keyword">int32</span>&gt;(InputID));
-    }
-}
-
-<span class="keyword">void</span> AThorPlayerCharacter::<span class="method">Input_Roll_Pressed</span>(<span class="keyword">const</span> FInputActionValue&amp; Value)
-{
-    <span class="method">OnAbilityInputPressed</span>(EThorAbilityInputID::Roll);
-}
-
-<span class="keyword">void</span> AThorPlayerCharacter::<span class="method">Input_LightAttack_Pressed</span>(<span class="keyword">const</span> FInputActionValue&amp; Value)
-{
-    <span class="method">OnAbilityInputPressed</span>(EThorAbilityInputID::LightAttack);
-}
-
-<span class="keyword">void</span> AThorPlayerCharacter::<span class="method">Input_MediumAttack_Pressed</span>(<span class="keyword">const</span> FInputActionValue&amp; Value)
-{
-    <span class="method">OnAbilityInputPressed</span>(EThorAbilityInputID::MediumAttack);
-}
-
-<span class="keyword">void</span> AThorPlayerCharacter::<span class="method">Input_HeavyAttack_Pressed</span>(<span class="keyword">const</span> FInputActionValue&amp; Value)
-{
-    <span class="method">OnAbilityInputPressed</span>(EThorAbilityInputID::HeavyAttack);
-}</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                            <h5>Gameplay Ability - Cancellable</h5>
-                            <p>
-                                One aspect GAS doesn't handle out of the box is animation canceling,
-                                so I developed a custom solution built on top of GAS.
-                                What is animation canceling? To prevent ability spamming,
-                                we could simply block incoming inputs during an ability's lifetime—that's straightforward.
-                                However, for fluid combat, we want to lift input blocking during a cancel window,
-                                typically at the start of an animation's recovery phase.
-                            </p>
-                            <p>
-                                An animation notify state opens and closes this window by assigning and removing a custom tag.
-                                The gameplay ability's CanActivateAbility function (which I extend)
-                                then checks whether we're performing a blocked ability and, if so, whether the cancel tag is present.
-                            </p>
-
-                            <div class="mb-4">
-<button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCancellable" aria-expanded="false" aria-controls="codeSnippetCancellable">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-        <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-    </svg>
-    View Code
-</button>
-<div class="collapse code-collapse mt-3" id="codeSnippetCancellable">
-    <div class="code-example">
-<pre><code>UThorGameplayAbility_Cancellable::<span class="method">UThorGameplayAbility_Cancellable</span>()
-{
-    InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
-    bRetriggerInstancedAbility = <span class="keyword">true</span>;
-}
-
-<span class="keyword">bool</span> UThorGameplayAbility_Cancellable::<span class="method">CanActivateAbility</span>(
-    <span class="keyword">const</span> FGameplayAbilitySpecHandle Handle,
-    <span class="keyword">const</span> FGameplayAbilityActorInfo* ActorInfo,
-    <span class="keyword">const</span> FGameplayTagContainer* SourceTags,
-    <span class="keyword">const</span> FGameplayTagContainer* TargetTags,
-    FGameplayTagContainer* OptionalRelevantTags) <span class="keyword">const</span>
-{
-    UAbilitySystemComponent* ASC = ActorInfo-&gt;AbilitySystemComponent.<span class="method">Get</span>();
-    <span class="keyword">if</span> (!ASC) <span class="keyword">return</span> <span class="keyword">false</span>;
-
-    <span class="keyword">bool</span> bAttackActive = ASC-&gt;<span class="method">HasMatchingGameplayTag</span>(ThorGameplayTags::Ability_Attack);
-    <span class="keyword">if</span> (bAttackActive)
-    {
-        <span class="keyword">if</span> (!RequiredCancelTag.<span class="method">IsValid</span>() || !ASC-&gt;<span class="method">HasMatchingGameplayTag</span>(RequiredCancelTag))
-        {
-            <span class="keyword">return</span> <span class="keyword">false</span>;
-        }
-    }
-
-    <span class="keyword">return</span> Super::<span class="method">CanActivateAbility</span>(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
-}</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                            <h5>Gameplay Ability - Attack</h5>
-                            <p>
-                                Building on the cancellable ability, I implement the attack ability.
-                                The attack ability itself is fairly straightforward,
-                                but I also added another signature feature of souls-like games: the "canned" combo sequence.
-                                If the player times the cancel windows correctly, they chain through a combo attack sequence.
-                                My implementation checks the animation montage—if it contains different sections,
-                                it's automatically recognized as a combo sequence.
-                            </p>
-
-                            <div class="mb-4">
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttack" aria-expanded="false" aria-controls="codeSnippetAttack">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-        </svg>
-        View Code
-    </button>
-    <div class="collapse code-collapse mt-3" id="codeSnippetAttack">
-        <div class="code-example">
-<pre><code>UThorGameplayAbility_Attack::<span class="method">UThorGameplayAbility_Attack</span>()
-{
-    ActivationOwnedTags.<span class="method">AddTag</span>(ThorGameplayTags::Ability_Attack);
-    RequiredCancelTag = ThorGameplayTags::State_CancelWindow_Attack;
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">ActivateAbility</span>(
-    <span class="keyword">const</span> FGameplayAbilitySpecHandle Handle,
-    <span class="keyword">const</span> FGameplayAbilityActorInfo* ActorInfo,
-    <span class="keyword">const</span> FGameplayAbilityActivationInfo ActivationInfo,
-    <span class="keyword">const</span> FGameplayEventData* TriggerEventData)
-{
-    Super::<span class="method">ActivateAbility</span>(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
-    <span class="keyword">if</span> (!<span class="method">K2_CommitAbility</span>())
-    {
-        <span class="method">K2_EndAbility</span>();
-        <span class="keyword">return</span>;
-    }
-
-    <span class="keyword">if</span> (<span class="method">HasAuthorityOrPredictionKey</span>(ActorInfo, &amp;ActivationInfo))
-    {
-        FName CurrentSection = <span class="method">GetCurrentSection</span>();
-
-        UAbilityTask_PlayMontageAndWait* MontageTask = UAbilityTask_PlayMontageAndWait::<span class="method">CreatePlayMontageAndWaitProxy</span>(
-            <span class="keyword">this</span>,
-            NAME_None,
-            AttackMontage,
-            MontagePlayRate,
-            CurrentSection
-        );
-
-        MontageTask-&gt;OnCompleted.<span class="method">AddDynamic</span>(<span class="keyword">this</span>, &amp;ThisClass::OnMontageCompleted);
-        MontageTask-&gt;OnBlendOut.<span class="method">AddDynamic</span>(<span class="keyword">this</span>, &amp;ThisClass::OnMontageBlendOut);
-        MontageTask-&gt;OnCancelled.<span class="method">AddDynamic</span>(<span class="keyword">this</span>, &amp;ThisClass::OnMontageCancelled);
-        MontageTask-&gt;OnInterrupted.<span class="method">AddDynamic</span>(<span class="keyword">this</span>, &amp;ThisClass::OnMontageInterrupted);
-        MontageTask-&gt;<span class="method">ReadyForActivation</span>();
-
-        <span class="method">AdvanceCombo</span>();
-    }
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">OnMontageCompleted</span>()
-{
-    <span class="method">ResetCombo</span>();
-    <span class="method">K2_EndAbility</span>();
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">OnMontageBlendOut</span>()
-{
-    <span class="method">ResetCombo</span>();
-    <span class="method">K2_EndAbility</span>();
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">OnMontageCancelled</span>()
-{
-    <span class="method">K2_EndAbility</span>();
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">OnMontageInterrupted</span>()
-{
-    <span class="method">ResetCombo</span>();
-    <span class="method">K2_EndAbility</span>();
-}
-
-FName UThorGameplayAbility_Attack::<span class="method">GetCurrentSection</span>() <span class="keyword">const</span>
-{
-    <span class="keyword">if</span> (!AttackMontage) <span class="keyword">return</span> NAME_None;
-
-    <span class="keyword">const</span> TArray&lt;FCompositeSection&gt;&amp; Sections = AttackMontage-&gt;CompositeSections;
-    <span class="keyword">if</span> (Sections.<span class="method">Num</span>() == <span class="number">0</span>) <span class="keyword">return</span> NAME_None;
-
-    <span class="keyword">int32</span> Index = CurrentComboIndex % Sections.<span class="method">Num</span>();
-    <span class="keyword">return</span> Sections[Index].SectionName;
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">AdvanceCombo</span>()
-{
-    <span class="keyword">if</span> (!AttackMontage) <span class="keyword">return</span>;
-
-    <span class="keyword">int32</span> NumSections = AttackMontage-&gt;CompositeSections.<span class="method">Num</span>();
-    <span class="keyword">if</span> (NumSections == <span class="number">0</span>) <span class="keyword">return</span>;
-
-    CurrentComboIndex++;
-    <span class="keyword">if</span> (CurrentComboIndex &gt;= NumSections)
-    {
-        CurrentComboIndex = <span class="number">0</span>;
-    }
-}
-
-<span class="keyword">void</span> UThorGameplayAbility_Attack::<span class="method">ResetCombo</span>()
-{
-    CurrentComboIndex = <span class="number">0</span>;
-}</code></pre>
-        </div>
-    </div>
-                            </div>
-
-                            <hr class="my-3">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-
-                <!-- World Interaction System -->
-                <div id="world-interaction" class="mb-5">
-                    <video class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                        <source src="videos/Asgard_video2.mp4" type="video/mp4">
-                    </video>
-                    <div class="pt-3">
-                        <!-- Text -->
-                        <h2 class="h3 mb-3 fw-bold">World Interaction System</h2>
-                        <div class="fs-6">
-                            <p>
-                                To interact with the world—and that includes almost everything,
-                                from kindling a light and opening chests to picking up objects
-                                or talking to NPCs—I have a single, all-purpose interaction
-                                interface that each interactable object can implement as needed.
-                                The interaction interface is complemented by an interaction info widget,
-                                and an interaction input key that allows players to initiate actions,
-                                such as starting a conversation with an NPC.
-
-                            </p>
-                            <p>
-                                The environment scanner continuously detects nearby interactable objects.
-                                When it finds one, the info widget appears and populates its slots with data
-                                provided by the object: the appropriate icon, name, description, and action prompt.
-                                The performance depends heavily on how the environment scanner is implemented.
-                                My implementation differs slightly from Tom Looman's approach. I use an overlap sphere
-                                limited to a custom interaction channel, then apply a dot product filter to identify
-                                the object directly in front of the player while also factoring in distance.
-                            </p>
-                        </div>
-                        <!-- Code Snippet -->
-                        <div class="mt-3">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetInteraction" aria-expanded="false" aria-controls="codeSnippetInteraction">
+        <div class="container-fluid px-3" style="max-width: 768px;">
+
+            <!-- Page Header -->
+            <div class="mb-5 pt-4">
+                <h1 class="display-4 fw-semibold mb-3">Souls-like Viking RPG</h1>
+                <p class="lead fs-5">
+                This page documents my combat system built with the Gameplay Ability System (GAS),
+                covering attributes, Gameplay Effects, animation systems,
+                and the state-driven logic behind responsive Souls-like combat.
+                </p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+                <a href="index.html" class="text-decoration-none text-dark back-to-portfolio-link">Back to Portfolio</a>
+            </div>
+
+            <div id="GAS" class="mb-5">
+                <video class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
+                    <source src="videos/Asgard_video3.mp4" type="video/mp4">
+                </video>
+
+                <div class="pt-4">
+                    <h2 class="h3 mb-3 fw-bold">Gameplay Ability System (GAS)</h2>
+                    <div class="fs-6">
+                        <p>
+                            While GAS requires considerable boilerplate code, once set up it becomes quite convenient to work with.
+                            My base GAS setup is built on four GAS-specific classes
+                            (using "Thor" as the project prefix, following standard naming conventions):
+                        </p>
+                        <ul>
+                            <li>ThorAbilityInputID</li>
+                            <li>ThorAbilitySystemComponent</li>
+                            <li>ThorAttributeSet</li>
+                            <li>ThorGameplayAbility</li>
+                        </ul>
+                        <p>
+                            These four classes can be surprisingly minimal.
+                            ThorAbilityInputID is simply an enumeration.
+                            ThorGameplayAbility, the base class for all gameplay abilities,
+                            implements only a single property: the aforementioned ability input ID.
+                            ThorAbilitySystemComponent doesn't require any implementation to get started.
+                            GAS also relies on Gameplay Tags, which prove useful for all kinds of implementations beyond GAS itself.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAbilityInputID" aria-expanded="false" aria-controls="codeSnippetAbilityInputID">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                                     <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
                                 </svg>
                                 View Code
                             </button>
-                            <div class="collapse code-collapse mt-3" id="codeSnippetInteraction">
-                                <div class="code-example">
-<pre><code><span class="comment">// Spatial partitioning with overlap sphere, then filtering by dot product</span>
-<span class="keyword">void</span> UAsgardInteractionComponent::<span class="method">UpdateBestInteractable</span>()
-{
-    <span class="comment">// Get all interactable objects within radius</span>
-    TArray&lt;FOverlapResult&gt; Overlaps;
-    FVector OwnerLocation = Owner-&gt;<span class="method">GetActorLocation</span>();
-    
-    GetWorld()-&gt;<span class="method">OverlapMultiByChannel</span>(
-        Overlaps,
-        OwnerLocation,
-        FQuat::Identity,
-        ECC_Interactable,
-        FCollisionShape::<span class="method">MakeSphere</span>(InteractionRadius),
-        QueryParams
-    );
-    
-    <span class="comment">// Filter by dot product to find object in front of player</span>
-    AActor* NewBestActor = <span class="keyword">nullptr</span>;
-    <span class="keyword">float</span> BestScore = <span class="number">-1.0f</span>;
-    
-    FVector CameraForward = CameraRotation.<span class="method">Vector</span>();
-    
-    <span class="keyword">for</span> (<span class="keyword">const</span> FOverlapResult& Overlap : Overlaps)
-    {
-        AActor* Actor = Overlap.<span class="method">GetActor</span>();
-        
-        FVector ToActor = (Actor-&gt;<span class="method">GetActorLocation</span>() - CameraLocation).<span class="method">GetSafeNormal</span>();
-        <span class="keyword">float</span> DotProduct = FVector::<span class="method">DotProduct</span>(CameraForward, ToActor);
-        
-        <span class="keyword">if</span> (DotProduct &gt; DotProductThreshold)
-        {
-            <span class="comment">// Weight by distance - closer objects preferred</span>
-            <span class="keyword">float</span> Distance = FVector::<span class="method">Dist</span>(OwnerLocation, Actor-&gt;<span class="method">GetActorLocation</span>());
-            <span class="keyword">float</span> DistanceWeight = <span class="number">1.0f</span> - (Distance / InteractionRadius);
-            <span class="keyword">float</span> Score = DotProduct * FMath::<span class="method">Lerp</span>(<span class="number">0.5f</span>, <span class="number">1.0f</span>, DistanceWeight);
-            
-            <span class="keyword">if</span> (Score &gt; BestScore)
-            {
-                BestScore = Score;
-                NewBestActor = Actor;
-            }
-        }
-    }
-    
-    <span class="comment">// Update current interactable and trigger widget updates</span>
-    <span class="keyword">if</span> (CurrentInteractable != NewBestActor)
-    {
-        <span class="keyword">if</span> (CurrentInteractable)
-        {
-            <span class="method">HideInteractionWidget</span>();
-            IAsgardInteractable::<span class="method">Execute_OnInteractionFocusLost</span>(CurrentInteractable);
-        }
-        
-        CurrentInteractable = NewBestActor;
-        
-        <span class="keyword">if</span> (CurrentInteractable)
-        {
-            IAsgardInteractable::<span class="method">Execute_OnInteractionFocusGained</span>(CurrentInteractable);
-            <span class="method">ShowInteractionWidget</span>();
-        }
-    }
-}</code></pre>
-                                </div>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetAbilityInputID">
+                                <pre><code class="language-cpp">
+                                UENUM(BlueprintType)
+                                enum class EThorAbilityInputID : uint8
+                                {
+                                    None = 0,
+                                    Confirm,
+                                    Cancel,
+                                    Roll,
+                                    LightAttack,
+                                    MediumAttack,
+                                    HeavyAttack,
+                                    Block,
+                                    UseItem
+                                };
+
+                                UCLASS()
+                                class THUNDERSTORM_API UThorGameplayAbility : public UGameplayAbility
+                                {
+                                    GENERATED_BODY()
+
+                                public:
+                                    UThorGameplayAbility::UThorGameplayAbility();
+
+                                    UPROPERTY(EditDefaultsOnly, Category = "Input")
+                                    EThorAbilityInputID AbilityInputID = EThorAbilityInputID::None;
+                                };</code></pre>
                             </div>
                         </div>
 
+                        <hr class="my-3">
+
+                        <h5> Attribute Set</h5>
+                        <p>
+                            GAS provides macros for setting up attributes. For my souls-like game, I use just four:
+                        </p>
+                        <ul>
+                            <li>Health</li>
+                            <li>MaxHealth</li>
+                            <li>Stamina</li>
+                            <li>MaxStamina</li>
+                        </ul>
+                        <p>
+                            One aspect that requires attention is proper clamping of these attributes.
+                            This happens in two places: PreAttributeChange clamps the value before it's queried, ensuring valid reads.
+                            PostGameplayEffectExecute clamps the actual base value after a gameplay effect is applied.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttributeSet" aria-expanded="false" aria-controls="codeSnippetAttributeSet">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                                </svg>
+                                View Code
+                            </button>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetAttributeSet">
+                                <pre><code class="language-cpp">
+                                void UThorAttributeSet::GetLifetimeReplicatedProps(TArray&lt;FLifetimeProperty&gt;&amp; OutLifetimeProps) const
+                                {
+                                    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+                                    DOREPLIFETIME_CONDITION_NOTIFY(UThorAttributeSet, Health, COND_None, REPNOTIFY_Always);
+                                    DOREPLIFETIME_CONDITION_NOTIFY(UThorAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
+                                    DOREPLIFETIME_CONDITION_NOTIFY(UThorAttributeSet, Stamina, COND_None, REPNOTIFY_Always);
+                                    DOREPLIFETIME_CONDITION_NOTIFY(UThorAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
+                                }
+
+                                void UThorAttributeSet::PreAttributeChange(const FGameplayAttribute&amp; Attribute, float&amp; NewValue)
+                                {
+                                    Super::PreAttributeChange(Attribute, NewValue);
+
+                                    if (Attribute == GetHealthAttribute())
+                                    {
+                                        NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+                                    }
+                                    else if (Attribute == GetStaminaAttribute())
+                                    {
+                                        NewValue = FMath::Clamp(NewValue, 0.f, GetMaxStamina());
+                                    }
+                                }
+
+                                void UThorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData&amp; Data)
+                                {
+                                    Super::PostGameplayEffectExecute(Data);
+
+                                    if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+                                    {
+                                        SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+
+                                        if (GetHealth() &lt;= 0.f)
+                                        {
+                                            if (AThorCharacter* Character = Cast&lt;AThorCharacter&gt;(GetOwningActor()))
+                                            {
+                                                Character-&gt;OnHealthDepleted();
+                                            }
+                                        }
+                                    }
+                                    else if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
+                                    {
+                                        SetStamina(FMath::Clamp(GetStamina(), 0.f, GetMaxStamina()));
+                                    }
+                                }
+
+                                void UThorAttributeSet::OnRep_Health(const FGameplayAttributeData&amp; OldHealth)
+                                {
+                                    GAMEPLAYATTRIBUTE_REPNOTIFY(UThorAttributeSet, Health, OldHealth);
+                                }
+
+                                void UThorAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData&amp; OldMaxHealth)
+                                {
+                                    GAMEPLAYATTRIBUTE_REPNOTIFY(UThorAttributeSet, MaxHealth, OldMaxHealth);
+                                }
+
+                                void UThorAttributeSet::OnRep_Stamina(const FGameplayAttributeData&amp; OldStamina)
+                                {
+                                    GAMEPLAYATTRIBUTE_REPNOTIFY(UThorAttributeSet, Stamina, OldStamina);
+                                }
+
+                                void UThorAttributeSet::OnRep_MaxStamina(const FGameplayAttributeData&amp; OldMaxStamina)
+                                {
+                                    GAMEPLAYATTRIBUTE_REPNOTIFY(UThorAttributeSet, MaxStamina, OldMaxStamina);
+                                }</code></pre>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <h5>Base Character implementing GAS interface</h5>
+                        <p>
+                            ThorCharacter, the base class for all my character classes, implements the GAS interface.
+                            ThorPlayerCharacter, which inherits from ThorCharacter,
+                            sets up the input bindings for GAS using ThorAbilityInputID.
+                        </p>
+                        <p>
+                            One of GAS's key advantages is that it's built with multiplayer in mind.
+                            For a proper multiplayer setup, we need to separate client-side and server-side initialization.
+                            There are two options: initialize in the player controller class (ThorPlayerController)
+                            or in the character class (ThorCharacter).
+                            I chose the character class approach, which involves less cross-referencing.
+                            Server-side initialization happens in PossessedBy,
+                            while client-side initialization occurs in OnRep_PlayerState.
+                            Both need to initialize ability actor info, but only the server should grant default abilities and effects.
+                            We also bind callback functions to GAS delegates in both functions.
+                        </p>
+                        <p>
+                            For my souls-like game's health and stamina attributes, GAS allows binding to attribute changes—useful
+                            for displaying health and stamina in the UI.
+                            I set up custom OnHealthChange and OnStaminaChange delegates
+                            on ThorCharacter and tie them to their respective GAS delegates.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCharacter" aria-expanded="false" aria-controls="codeSnippetCharacter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                                </svg>
+                                View Code
+                            </button>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetCharacter">
+                                <pre><code class="language-cpp">
+                                void AThorCharacter::PossessedBy(AController* NewController)
+                                {
+                                    Super::PossessedBy(NewController);
+
+                                    // Server-side initialization
+                                    if (AbilitySystemComponent)
+                                    {
+                                        AbilitySystemComponent-&gt;InitAbilityActorInfo(this, this);
+                                        InitializeAttributes();
+                                        GrantDefaultAbilities();
+                                        ApplyDefaultEffects();
+                                        BindToAttributeChanges();
+                                        BroadcastInitialValues();
+                                    }
+                                }
+
+                                void AThorCharacter::OnRep_PlayerState()
+                                {
+                                    Super::OnRep_PlayerState();
+
+                                    // Client-side initialization
+                                    if (AbilitySystemComponent)
+                                    {
+                                        AbilitySystemComponent-&gt;InitAbilityActorInfo(this, this);
+                                        BindToAttributeChanges();
+                                        BroadcastInitialValues();
+                                    }
+                                }
+
+                                void AThorCharacter::GrantDefaultAbilities()
+                                {
+                                    if (!AbilitySystemComponent || !HasAuthority()) return;
+
+                                    for (const TSubclassOf&lt;UThorGameplayAbility&gt;&amp; AbilityClass : DefaultAbilities)
+                                    {
+                                        if (!AbilityClass) continue;
+
+                                        const UThorGameplayAbility* AbilityCDO = AbilityClass.GetDefaultObject();
+                                        FGameplayAbilitySpec Spec(
+                                            AbilityClass,
+                                            1,
+                                            static_cast&lt;int32&gt;(AbilityCDO-&gt;AbilityInputID),
+                                            this
+                                        );
+
+                                        AbilitySystemComponent-&gt;GiveAbility(Spec);
+                                    }
+                                }
+
+                                void AThorCharacter::BindToAttributeChanges()
+                                {
+                                    if (AbilitySystemComponent)
+                                    {
+                                        AbilitySystemComponent-&gt;GetGameplayAttributeValueChangeDelegate(UThorAttributeSet::GetHealthAttribute())
+                                            .AddUObject(this, &amp;AThorCharacter::HandleHealthChanged);
+
+                                        AbilitySystemComponent-&gt;GetGameplayAttributeValueChangeDelegate(UThorAttributeSet::GetStaminaAttribute())
+                                            .AddUObject(this, &amp;AThorCharacter::HandleStaminaChanged);
+                                    }
+                                }</code></pre>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <h5>Player Character processing GAS Input ID</h5>
+                        <p>
+                            ThorPlayerCharacter is primarily responsible for input setup.
+                            For GAS, there are two approaches to handling input:
+                            TryActivateAbility and AbilityLocalInputPressed / AbilityLocalInputReleased.
+                            I opted for TryActivateAbility.
+                            During development, I found that AbilityLocalInputPressed doesn't recognize retriggered inputs,
+                            which prevented animation canceling from working.
+                            TryActivateAbility, on the other hand, handles this correctly.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetPlayerCharacter" aria-expanded="false" aria-controls="codeSnippetPlayerCharacter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                                </svg>
+                                View Code
+                            </button>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetPlayerCharacter">
+                                <pre><code class="language-cpp">
+                                void AThorPlayerCharacter::OnAbilityInputPressed(EThorAbilityInputID InputID)
+                                {
+                                    if (AbilitySystemComponent)
+                                    {
+                                        FGameplayAbilitySpec* Spec = AbilitySystemComponent-&gt;FindAbilitySpecFromInputID(
+                                            static_cast&lt;int32&gt;(InputID)
+                                        );
+
+                                        if (Spec)
+                                        {
+                                            AbilitySystemComponent-&gt;TryActivateAbility(Spec-&gt;Handle);
+                                        }
+                                    }
+                                }
+
+                                void AThorPlayerCharacter::OnAbilityInputReleased(EThorAbilityInputID InputID)
+                                {
+                                    if (AbilitySystemComponent)
+                                    {
+                                        AbilitySystemComponent-&gt;AbilityLocalInputReleased(static_cast&lt;int32&gt;(InputID));
+                                    }
+                                }
+
+                                void AThorPlayerCharacter::Input_Roll_Pressed(const FInputActionValue&amp; Value)
+                                {
+                                    OnAbilityInputPressed(EThorAbilityInputID::Roll);
+                                }
+
+                                void AThorPlayerCharacter::Input_LightAttack_Pressed(const FInputActionValue&amp; Value)
+                                {
+                                    OnAbilityInputPressed(EThorAbilityInputID::LightAttack);
+                                }
+
+                                void AThorPlayerCharacter::Input_MediumAttack_Pressed(const FInputActionValue&amp; Value)
+                                {
+                                    OnAbilityInputPressed(EThorAbilityInputID::MediumAttack);
+                                }
+
+                                void AThorPlayerCharacter::Input_HeavyAttack_Pressed(const FInputActionValue&amp; Value)
+                                {
+                                    OnAbilityInputPressed(EThorAbilityInputID::HeavyAttack);
+                                }</code></pre>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <h5>Gameplay Ability - Cancellable</h5>
+                        <p>
+                            One aspect GAS doesn't handle out of the box is animation canceling,
+                            so I developed a custom solution built on top of GAS.
+                            What is animation canceling? To prevent ability spamming,
+                            we could simply block incoming inputs during an ability's lifetime—that's straightforward.
+                            However, for fluid combat, we want to lift input blocking during a cancel window,
+                            typically at the start of an animation's recovery phase.
+                        </p>
+                        <p>
+                            An animation notify state opens and closes this window by assigning and removing a custom tag.
+                            The gameplay ability's CanActivateAbility function (which I extend)
+                            then checks whether we're performing a blocked ability and, if so, whether the cancel tag is present.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCancellable" aria-expanded="false" aria-controls="codeSnippetCancellable">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                                </svg>
+                                View Code
+                            </button>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetCancellable">
+                                <pre><code class="language-cpp">
+                                UThorGameplayAbility_Cancellable::UThorGameplayAbility_Cancellable()
+                                {
+                                    InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+                                    bRetriggerInstancedAbility = true;
+                                }
+
+                                bool UThorGameplayAbility_Cancellable::CanActivateAbility(
+                                    const FGameplayAbilitySpecHandle Handle,
+                                    const FGameplayAbilityActorInfo* ActorInfo,
+                                    const FGameplayTagContainer* SourceTags,
+                                    const FGameplayTagContainer* TargetTags,
+                                    FGameplayTagContainer* OptionalRelevantTags) const
+                                {
+                                    UAbilitySystemComponent* ASC = ActorInfo-&gt;AbilitySystemComponent.Get();
+                                    if (!ASC) return false;
+
+                                    bool bAttackActive = ASC-&gt;HasMatchingGameplayTag(ThorGameplayTags::Ability_Attack);
+                                    if (bAttackActive)
+                                    {
+                                        if (!RequiredCancelTag.IsValid() || !ASC-&gt;HasMatchingGameplayTag(RequiredCancelTag))
+                                        {
+                                            return false;
+                                        }
+                                    }
+
+                                    return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
+                                }</code></pre>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <h5>Gameplay Ability - Attack</h5>
+                        <p>
+                            Building on the cancellable ability, I implement the attack ability.
+                            The attack ability itself is fairly straightforward,
+                            but I also added another signature feature of souls-like games: the "canned" combo sequence.
+                            If the player times the cancel windows correctly, they chain through a combo attack sequence.
+                            My implementation checks the animation montage—if it contains different sections,
+                            it's automatically recognized as a combo sequence.
+                        </p>
+
+                        <div class="mb-4">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttack" aria-expanded="false" aria-controls="codeSnippetAttack">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                                </svg>
+                                View Code
+                            </button>
+                            <div class="collapse code-collapse mt-3" id="codeSnippetAttack">
+                                <pre><code class="language-cpp">
+                                UThorGameplayAbility_Attack::UThorGameplayAbility_Attack()
+                                {
+                                    ActivationOwnedTags.AddTag(ThorGameplayTags::Ability_Attack);
+                                    RequiredCancelTag = ThorGameplayTags::State_CancelWindow_Attack;
+                                }
+
+                                void UThorGameplayAbility_Attack::ActivateAbility(
+                                    const FGameplayAbilitySpecHandle Handle,
+                                    const FGameplayAbilityActorInfo* ActorInfo,
+                                    const FGameplayAbilityActivationInfo ActivationInfo,
+                                    const FGameplayEventData* TriggerEventData)
+                                {
+                                    Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+
+                                    if (!K2_CommitAbility())
+                                    {
+                                        K2_EndAbility();
+                                        return;
+                                    }
+
+                                    if (HasAuthorityOrPredictionKey(ActorInfo, &amp;ActivationInfo))
+                                    {
+                                        FName CurrentSection = GetCurrentSection();
+
+                                        UAbilityTask_PlayMontageAndWait* MontageTask = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
+                                            this,
+                                            NAME_None,
+                                            AttackMontage,
+                                            MontagePlayRate,
+                                            CurrentSection
+                                        );
+
+                                        MontageTask-&gt;OnCompleted.AddDynamic(this, &amp;ThisClass::OnMontageCompleted);
+                                        MontageTask-&gt;OnBlendOut.AddDynamic(this, &amp;ThisClass::OnMontageBlendOut);
+                                        MontageTask-&gt;OnCancelled.AddDynamic(this, &amp;ThisClass::OnMontageCancelled);
+                                        MontageTask-&gt;OnInterrupted.AddDynamic(this, &amp;ThisClass::OnMontageInterrupted);
+                                        MontageTask-&gt;ReadyForActivation();
+
+                                        AdvanceCombo();
+                                    }
+                                }
+
+                                void UThorGameplayAbility_Attack::OnMontageCompleted()
+                                {
+                                    ResetCombo();
+                                    K2_EndAbility();
+                                }
+
+                                void UThorGameplayAbility_Attack::OnMontageBlendOut()
+                                {
+                                    ResetCombo();
+                                    K2_EndAbility();
+                                }
+
+                                void UThorGameplayAbility_Attack::OnMontageCancelled()
+                                {
+                                    K2_EndAbility();
+                                }
+
+                                void UThorGameplayAbility_Attack::OnMontageInterrupted()
+                                {
+                                    ResetCombo();
+                                    K2_EndAbility();
+                                }
+
+                                FName UThorGameplayAbility_Attack::GetCurrentSection() const
+                                {
+                                    if (!AttackMontage) return NAME_None;
+
+                                    const TArray&lt;FCompositeSection&gt;&amp; Sections = AttackMontage-&gt;CompositeSections;
+                                    if (Sections.Num() == 0) return NAME_None;
+
+                                    int32 Index = CurrentComboIndex % Sections.Num();
+                                    return Sections[Index].SectionName;
+                                }
+
+                                void UThorGameplayAbility_Attack::AdvanceCombo()
+                                {
+                                    if (!AttackMontage) return;
+
+                                    int32 NumSections = AttackMontage-&gt;CompositeSections.Num();
+                                    if (NumSections == 0) return;
+
+                                    CurrentComboIndex++;
+                                    if (CurrentComboIndex &gt;= NumSections)
+                                    {
+                                        CurrentComboIndex = 0;
+                                    }
+                                }
+
+                                void UThorGameplayAbility_Attack::ResetCombo()
+                                {
+                                    CurrentComboIndex = 0;
+                                }</code></pre>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
                     </div>
-                </div>
 
-                <hr class="my-4">
-
-
-
-                <!-- Credits -->
-                <div class="mb-5">
-                    <h2 class="h4 mb-3">Credits & Assets</h2>
-                    
-                    <h5 class="mt-4 mb-2 text-muted fw-normal">Resources</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <strong>Professional Game Development in C++ and Unreal Engine</strong> (Course) - 
-                            Tom Looman, 
-                            <a href="https://courses.tomlooman.com/" target="_blank" class="text-dark text-decoration-none course-link">courses.tomlooman.com</a>
-                        </li>
-                    </ul>
-                    
-                    <h5 class="mt-4 mb-2 text-muted fw-normal">Assets</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><strong>Viking Girl</strong> (Character Model) - Dary Palasky, 2022</li>
-                        <li class="mb-2"><strong>Frank Slash Pack</strong> (Animation Pack) - Frank Climax, 2023</li>
-                        <li class="mb-2"><strong>Medieval Props</strong> (3D Assets) - Yarrawah Interactive, 2025</li>
-                        <li class="mb-2"><strong>Mythical Attack Trail</strong> (VFX) - CodePhase Games, 2024</li>
-                        <li class="mb-2"><strong>Flat Icons Collection</strong> (UI Assets) - OneLittleFeather, 2025</li>
-                        <li class="mb-2"><strong>VFX Backgrounds</strong> (VFX) - FX Cat UA, 2021</li>
-                    </ul>
-                    
-                    <!-- <p class="small text-muted mt-3">All assets used under their respective licenses from the Unreal Engine Marketplace.</p> -->
                 </div>
 
             </div>
+
+
+
+
+            <!-- World Interaction System -->
+            <div id="world-interaction" class="mb-5">
+                <video class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
+                    <source src="videos/Asgard_video2.mp4" type="video/mp4">
+                </video>
+                <div class="pt-3">
+                    <!-- Text -->
+                    <h2 class="h3 mb-3 fw-bold">World Interaction System</h2>
+                    <div class="fs-6">
+                        <p>
+                            To interact with the world—and that includes almost everything,
+                            from kindling a light and opening chests to picking up objects
+                            or talking to NPCs—I have a single, all-purpose interaction
+                            interface that each interactable object can implement as needed.
+                            The interaction interface is complemented by an interaction info widget,
+                            and an interaction input key that allows players to initiate actions,
+                            such as starting a conversation with an NPC.
+
+                        </p>
+                        <p>
+                            The environment scanner continuously detects nearby interactable objects.
+                            When it finds one, the info widget appears and populates its slots with data
+                            provided by the object: the appropriate icon, name, description, and action prompt.
+                            The performance depends heavily on how the environment scanner is implemented.
+                            My implementation differs slightly from Tom Looman's approach. I use an overlap sphere
+                            limited to a custom interaction channel, then apply a dot product filter to identify
+                            the object directly in front of the player while also factoring in distance.
+                        </p>
+                    </div>
+                    <!-- Code Snippet -->
+                    <div class="mt-3">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetInteraction" aria-expanded="false" aria-controls="codeSnippetInteraction">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                            </svg>
+                            View Code
+                        </button>
+                        <div class="collapse code-collapse mt-3" id="codeSnippetInteraction">
+                            <pre><code class="language-cpp">
+                            // Spatial partitioning with overlap sphere, then filtering by dot product
+                            void UAsgardInteractionComponent::UpdateBestInteractable()
+                            {
+                                // Get all interactable objects within radius
+                                TArray&lt;FOverlapResult&gt; Overlaps;
+                                FVector OwnerLocation = Owner-&gt;GetActorLocation();
+
+                                GetWorld()-&gt;OverlapMultiByChannel(
+                                    Overlaps,
+                                    OwnerLocation,
+                                    FQuat::Identity,
+                                    ECC_Interactable,
+                                    FCollisionShape::MakeSphere(InteractionRadius),
+                                    QueryParams
+                                );
+
+                                // Filter by dot product to find object in front of player
+                                AActor* NewBestActor = nullptr;
+                                float BestScore = -1.0f;
+
+                                FVector CameraForward = CameraRotation.Vector();
+
+                                for (const FOverlapResult&amp; Overlap : Overlaps)
+                                {
+                                    AActor* Actor = Overlap.GetActor();
+                                    
+                                    FVector ToActor = (Actor-&gt;GetActorLocation() - CameraLocation).GetSafeNormal();
+                                    float DotProduct = FVector::DotProduct(CameraForward, ToActor);
+                                    
+                                    if (DotProduct &gt; DotProductThreshold)
+                                    {
+                                        // Weight by distance - closer objects preferred
+                                        float Distance = FVector::Dist(OwnerLocation, Actor-&gt;GetActorLocation());
+                                        float DistanceWeight = 1.0f - (Distance / InteractionRadius);
+                                        float Score = DotProduct * FMath::Lerp(0.5f, 1.0f, DistanceWeight);
+                                        
+                                        if (Score &gt; BestScore)
+                                        {
+                                            BestScore = Score;
+                                            NewBestActor = Actor;
+                                        }
+                                    }
+                                }
+
+                                // Update current interactable and trigger widget updates
+                                if (CurrentInteractable != NewBestActor)
+                                {
+                                    if (CurrentInteractable)
+                                    {
+                                        HideInteractionWidget();
+                                        IAsgardInteractable::Execute_OnInteractionFocusLost(CurrentInteractable);
+                                    }
+                                    
+                                    CurrentInteractable = NewBestActor;
+                                    
+                                    if (CurrentInteractable)
+                                    {
+                                        IAsgardInteractable::Execute_OnInteractionFocusGained(CurrentInteractable);
+                                        ShowInteractionWidget();
+                                    }
+                                }
+                            }</code></pre>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Credits -->
+            <div class="mb-5">
+                <h2 class="h4 mb-3">Credits & Assets</h2>
+                
+                <h5 class="mt-4 mb-2 text-muted fw-normal">Resources</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <strong>Professional Game Development in C++ and Unreal Engine</strong> (Course) - 
+                        Tom Looman, 
+                        <a href="https://courses.tomlooman.com/" target="_blank" class="text-dark text-decoration-none course-link">courses.tomlooman.com</a>
+                    </li>
+                </ul>
+                
+                <h5 class="mt-4 mb-2 text-muted fw-normal">Assets</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><strong>Viking Girl</strong> (Character Model) - Dary Palasky, 2022</li>
+                    <li class="mb-2"><strong>Frank Slash Pack</strong> (Animation Pack) - Frank Climax, 2023</li>
+                    <li class="mb-2"><strong>Medieval Props</strong> (3D Assets) - Yarrawah Interactive, 2025</li>
+                    <li class="mb-2"><strong>Mythical Attack Trail</strong> (VFX) - CodePhase Games, 2024</li>
+                    <li class="mb-2"><strong>Flat Icons Collection</strong> (UI Assets) - OneLittleFeather, 2025</li>
+                    <li class="mb-2"><strong>VFX Backgrounds</strong> (VFX) - FX Cat UA, 2021</li>
+                </ul>
+                
+                <!-- <p class="small text-muted mt-3">All assets used under their respective licenses from the Unreal Engine Marketplace.</p> -->
+            </div>
+
+        </div>
     </main>
 
     <!-- Footer -->
@@ -767,9 +758,14 @@ FName UThorGameplayAbility_Attack::<span class="method">GetCurrentSection</span>
         crossorigin="anonymous">
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
-
 
 </body>
 </html>
