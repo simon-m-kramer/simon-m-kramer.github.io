@@ -152,3 +152,15 @@ html {
 .code-collapse pre code {
     display: block;
 }
+
+.carousel-caption-top {
+    position: absolute;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 1);
+}
