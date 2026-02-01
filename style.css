@@ -7,16 +7,14 @@ body {
 .body-text {font-size: 1.5rem; font-family: 'Crimson Pro', serif; }
 
 .font-emphasis-1 { font-family: 'Barlow', sans-serif; font-weight: 700;}
-.font-emphasis-2 { font-family: 'Space Grotesk', sans-serif; font-weight: 400;}
-.font-emphasis-3 { font-family: 'Barlow', sans-serif; font-weight: 400;}
-
+.font-emphasis-2 { font-family: 'Barlow', sans-serif; font-weight: 400;}
 
 .btn {
     font-family: 'Barlow', sans-serif;
 }
 
 /* Hacky way of changing small breakpoint from 768px to 700px for col-md-6 */
-@media (max-width: 699.98px) {
+/* @media (max-width: 699.98px) {
     .col-md-6 {
         width: 100%;
     }
@@ -25,7 +23,7 @@ body {
     .col-md-6 {
         width: 50%;
     }
-}
+} */
 
 
 /* Remove the focus outline from the navbar toggler */
@@ -50,7 +48,7 @@ html {
 }
 
 .resume-link {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Barlow', sans-serif;
     font-weight: 700;
 }
 
@@ -199,7 +197,7 @@ html {
 }
 
 .container-text {
-    max-width: 700px;
+    max-width: 768px;
     margin-inline: auto;
 }
 
