@@ -7,7 +7,7 @@ body {
 .body-text {font-size: 1.5rem; font-family: 'Crimson Pro', serif; }
 
 .font-primary { font-family: 'Barlow', sans-serif; font-weight: 700;}
-.font-secondary { font-family: 'Barlow', sans-serif; font-weight: 400;}
+.font-secondary { font-family: 'Space Grotesk', sans-serif; font-weight: 400;}
 .font-tertiary { font-family: 'Barlow', sans-serif; font-weight: 400;}
 
 
@@ -34,6 +34,11 @@ html {
 
 .resume-link:hover {
     text-decoration: underline !important;
+}
+
+.resume-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
 }
 
 .email-link {
