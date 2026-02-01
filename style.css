@@ -16,7 +16,7 @@ body {
 }
 
 /* Hacky way of changing small breakpoint from 768px to 700px for col-md-6 */
-/* @media (max-width: 699.98px) {
+@media (max-width: 699.98px) {
     .col-md-6 {
         width: 100%;
     }
@@ -25,12 +25,8 @@ body {
     .col-md-6 {
         width: 50%;
     }
-} */
-
-.page-nav a {
-    font-family: 'Barlow', sans-serif;
-    font-size: 1.1rem;
 }
+
 
 /* Remove the focus outline from the navbar toggler */
 .navbar-toggler:focus {
@@ -130,20 +126,16 @@ html {
 
 .page-nav a {
     color: #2c2c2c;
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.25rem;
     text-decoration: none;
-    font-size: 0.95rem;
+    padding-left: 1rem;
+    position: relative;
+    transition: opacity 0.2s ease;
 }
 
 .page-nav a:hover {
-    text-decoration: underline;
-}
-
-.page-nav a {
-    color: #2c2c2c;
-    text-decoration: none;
-    font-size: 0.95rem;
-    padding-left: 1rem;
-    position: relative;
+    opacity: 0.6;
 }
 
 .page-nav a::before {
@@ -207,7 +199,7 @@ html {
 }
 
 .container-text {
-    max-width: 768px;
+    max-width: 700px;
     margin-inline: auto;
 }
 
