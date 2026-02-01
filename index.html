@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <title>Simon Kramer</title>
 </head>
@@ -14,7 +24,7 @@
 
     <!-- Navbar -->
     <nav class="navbar bg-dark fixed-top" data-bs-theme="dark">
-        <div class="container px-3" style="max-width: 768px">
+        <div class="container px-3 container-media">
             <a class="navbar-brand" href="index.html">sk</a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="feature.html">Featured</a>
-                    <a class="nav-link" href="index.html#game-projects">Game Development</a>
+                    <a class="nav-link" href="index.html#featured">Game Development</a>
                     <a class="nav-link" href="index.html#previous-work">Technical Art</a>
                     <a class="nav-link" href="index.html#contact">Contact</a>
                     <a class="nav-link" href="about.html">About Me</a>
@@ -35,383 +45,256 @@
     <main class="flex-grow-1">
 
         <!-- Banner -->
-        <div class="container px-4 mb-5 text-center" style="max-width: 768px;">
-            <div class="pt-5">
-                <h1 class="display-1" style="font-weight: 600; margin-bottom: 0.25rem;">Simon Kramer</h1>
-                <h2 class="h1" style="font-weight: 300; margin-bottom: 1.0rem;">Gameplay Programmer</h2>
-                <div>
-                    <a href="about.html" class="btn btn-dark rounded-pill me-3">About Me</a>
-                    <a href="CV/Kramer_Simon_CV_Gameplay_Programmer.pdf" class="h6 text-decoration-none resume-link" target="_blank">
-                        View my Resume
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-arrow-up-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z" />
-                        </svg>
-                    </a>
+        <div class="container-text px-4 text-center" style="padding-top: 5rem; padding-bottom: 6rem;">
+            <h1 class="display-1 mb-2 font-primary">Simon Kramer</h1>
+            <p class="display-6 font-secondary mb-3 ">Gameplay Programmer</p>
+            <div>
+                <a href="about.html" class="btn btn-dark rounded-pill me-3">About Me</a>
+                <a href="CV/Kramer_Simon_CV_Gameplay_Programmer.pdf" class="h6 text-decoration-none resume-link" target="_blank">
+                    View my Resume
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Featured Card 1 -->
+        <div class="mb-5 pb-3" id="featured">
+
+            <!-- Video (wider) -->
+            <div class="container-media px-3 mb-3">
+                <video id="asgard_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
+                    <source src="videos/Asgard_video1.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Description (narrower) -->
+            <div class="container-text px-3">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <h2 class="h1 font-primary mb-0">Souls-like Viking RPG</h2>
+                    <span class="badge bg-success">Featured</span>
+                </div>
+                <p class="body-text">
+                    My graduation project at Futuregames, built in C++ with Unreal Engine.
+                    The focus is responsive combat using Unreal's Gameplay Ability System (GAS)—combining clean code architecture 
+                    with an understanding of how animations need to be authored for tight gameplay feel.
+                    Work in progress.
+                </p>
+                <a href="feature.html" class="btn btn-dark">Learn More</a>
+            </div>
+
+        </div>
+
+        <!-- <div style="height: 5rem;"></div> -->
+
+        <!-- Card 2 (two-column) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" 
+                        style="background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%); aspect-ratio: 16 / 9;">
+                        <div class="text-center text-white p-4">
+                            <h2 class="display-5 fw-bold mb-2">Action Stack</h2>
+                            <p class="h5 fw-light">Plugin for Unreal Engine</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Stack-based FSM</h2>
+                    <p class="body-text"> 
+                        Originally developed by Carl Granberg for Unity/C#,
+                        ported and redesigned as a composable UObject for Unreal Engine.
+                    </p>
+                    <a href="https://github.com/simon-m-kramer/Bifrost" class="btn btn-dark" target="_blank">View on GitHub</a>
                 </div>
             </div>
         </div>
 
-        <!-- Projects -->
-        <div class="container-fluid px-3 pt-3" style="max-width: 768px;">
-
-            <hr class="mb-5 pb-2">
-            <!-- <hr class="my-1"> -->
-            <!-- <h2 id="game-projects" class="display-7 fw-light mb-4">Game Development</h2> -->
-
-            <!-- Featured Card 1 -->
-            <div class="mb-5" id="game-projects">
-                <div class="row g-0">
-
-                    <!-- Video -->
-                    <div class="col-md-12">
-                        <video id="asgard_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                            <source src="videos/Asgard_video1.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <!-- Descripton -->
-                    <div class="col-md-12">
-                        <div class="py-2">
-                            <span class="badge bg-success mb-2">Featured</span>
-                            <h2 class="h1 fw-semibold">Souls-like Viking RPG</h2>
-                            <h5 class="h5 fw-semibold">Featuring Unreal Engine's Gameplay Ability System (GAS)</h5>
-                            <!-- <h2 class="h1 fw-semibold">Viking RPG <span class="badge bg-success fs-6 fw-normal align-middle" style="font-size: 0.65rem !important;">Featured</span></h2> -->
-                            <div class="fs-6">
-                                <p>
-                                My graduation project at Futuregames, built in C++ with Unreal Engine.
-                                The focus is responsive combat using GAS—combining clean code architecture with an understanding of how animations need to be authored for tight gameplay feel.
-                                Work in progress.
-                                </p>
-                            </div>
-                            <a href="feature.html" class="btn btn-dark">Learn More</a>
-                        </div>
-                    </div>
-
+        <!-- Card 3 (two-column) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <video id="synty_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
+                        <source src="videos/SyntyShooter_video2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="h2 font-primary">Weapon Recoil System</h3>
+                    <p class="body-text">
+                        Layered weapon recoil (impulse, animation, camera movement) built with Cinemachine 3 in Unity.
+                        Based on TheKiwiCoder's tutorial series, updated for Unity 6.
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <hr class="mb-5">
-
-
-            <!-- Card 2 -->
-            <div class="mb-5">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center justify-content-center rounded-3" 
-                            style="background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%); aspect-ratio: 16 / 9;">
-                            <div class="text-center text-white p-4">
-                                <h2 class="display-5 fw-bold mb-2">Action Stack</h2>
-                                <p class="h5 fw-light">Plugin for Unreal Engine</p>
+        <!-- Card 4 (two-column with carousel) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div id="projectCarousel" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="3"></button>
+                        </div>
+                        
+                        <div class="carousel-inner rounded-3">
+                            <div class="carousel-item active" data-link="https://futuregames.itch.io/gunsmoke-grimoires">
+                                <img src="img/FutureGames/GP_2/jVdLQP.png" class="d-block w-100" alt="Project 1" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                            </div>
+                            <div class="carousel-item" data-link="https://futuregames.itch.io/pentagon-rush">
+                                <img src="img/FutureGames/GP_1/sohy7_.png" class="d-block w-100" alt="Project 2" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                            </div>
+                            <div class="carousel-item" data-link="https://futuregames.itch.io/queens-rush">
+                                <img src="img/FutureGames/GP_3/GameProject3_16-9_1.png" class="d-block w-100" alt="Project 3" style="aspect-ratio: 16 / 9; object-fit: cover;">
+                            </div>
+                            <div class="carousel-item" data-link="https://dullyskull.itch.io/whisper-of-seasons">
+                                <img src="img/FutureGames/GP_4/on7U9L.png" class="d-block w-100" alt="Project 4" style="aspect-ratio: 16 / 9; object-fit: cover;">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Action Stack (Stack-Based FSM)</h3>
-                            <div class="fs-6">
-                            <p> 
-                                Originally developed by Carl Granberg for Unity/C#,
-                                ported and redesigned as a composable UObject for Unreal Engine.</p>
-                            </div>
-                            <a href="https://github.com/simon-m-kramer/Bifrost" class="btn btn-sm btn-outline-secondary" target="_blank">View on GitHub</a>
-                        </div>
+                        
+                        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Card 3 -->
-            <div class="mb-5">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <video id="synty_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                            <source src="videos/SyntyShooter_video2.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Weapon Recoil System</h3>
-                            <div class="fs-6">
-                            <p>
-                            Layered weapon recoil (impulse, animation, camera movement) built with Cinemachine 3 in Unity.
-                            Based on TheKiwiCoder's tutorial series, updated for Unity 6.
-                            </p>
-                            </div>
-                            <!-- <a href="shooter.html" class="btn btn-sm btn-outline-secondary">Learn More</a> -->
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Team Projects</h2>
+                    <p class="body-text">
+                        Four group projects at Futuregames,
+                        collaborating with artists, designers,
+                        and fellow programmers using Perforce.
+                    </p>
+                    <a id="dynamicLink" href="https://futuregames.itch.io/gunsmoke-grimoires" class="btn btn-dark" target="_blank">View Selected on Itch</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 (two-column with gradient) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" 
+                        style="background: linear-gradient(135deg, #434343 0%, #d4a574 100%); aspect-ratio: 16 / 9;">
+                        <div class="text-center text-white p-4">
+                            <h2 class="display-5 fw-bold mb-2">Math Utilities</h2>
+                            <p class="h5 fw-light">Plugin for Unreal Engine</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <!-- Card 4 -->
-            <div class="mb-5">
-                <div class="row g-0">
-
-                    <div class="col-md-6">
-                        <div id="projectCarousel" class="carousel slide">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
-                                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
-                                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
-                                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="3"></button>
-                            </div>
-                            
-                            <div class="carousel-inner rounded-3">
-                                <div class="carousel-item active" data-link="https://futuregames.itch.io/gunsmoke-grimoires">
-                                    <img src="img/FutureGames/GP_2/jVdLQP.png" class="d-block w-100" alt="Project 1" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item" data-link="https://futuregames.itch.io/pentagon-rush">
-                                    <img src="img/FutureGames/GP_1/sohy7_.png" class="d-block w-100" alt="Project 2" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item" data-link="https://futuregames.itch.io/queens-rush">
-                                    <img src="img/FutureGames/GP_3/GameProject3_16-9_1.png" class="d-block w-100" alt="Project 3" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item" data-link="https://dullyskull.itch.io/whisper-of-seasons">
-                                    <img src="img/FutureGames/GP_4/on7U9L.png" class="d-block w-100" alt="Project 4" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                            </div>
-                            
-                            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Content with dynamic button -->
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Team Projects</h3>
-                            <div class="fs-6">
-                            <p>
-                            Four group projects at Futuregames,
-                            collaborating with artists, designers,
-                            and fellow programmers using Perforce.
-                            </p>
-                            </div>
-                            <a id="dynamicLink" href="https://futuregames.itch.io/gunsmoke-grimoires" class="btn btn-sm btn-outline-secondary" target="_blank">View Selected on Itch</a>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Math Utilities</h2>
+                    <p class="body-text">
+                        A modular C++ library for easing functions and geometric operations in Unreal Engine.
+                    </p>
+                    <a href="https://github.com/simon-m-kramer/Eureka" class="btn btn-dark" target="_blank">View on GitHub</a>
                 </div>
             </div>
+        </div>
 
-
-
-            <!-- Card 5 -->
-            <div class="mb-5">
-                <div class="row g-0">
-                    <div class="col-md-6 pb-md-3">
-                        <div class="d-flex align-items-center justify-content-center rounded-3" 
-                            style="background: linear-gradient(135deg, #434343 0%, #d4a574 100%); aspect-ratio: 16 / 9;">
-                            <div class="text-center text-white p-4">
-                                <h2 class="display-5 fw-bold mb-2">Math Utilities</h2>
-                                <p class="h5 fw-light">Plugin for Unreal Engine</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Math Utilities</h3>
-                            <div class="fs-6">
-                            <p>
-                            A modular C++ library for easing functions and geometric operations in Unreal Engine.
-                            </p>
-                            </div>
-                            <a href="https://github.com/simon-m-kramer/Eureka" class="btn btn-sm btn-outline-secondary" target="_blank">View on GitHub</a>
-                        </div>
-                    </div>
+        <!-- Card 6 (two-column with video) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <video id="snake_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
+                        <source src="videos/snake_video1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Snake Simulation</h2>
+                    <p class="body-text">
+                        AI-driven snake simulation with A* pathfinding for autonomous navigation.
+                        Uses a linked list for tail segments. Includes a player-controlled mode.
+                    </p>
+                    <a href="https://smk1302.itch.io/snake" class="btn btn-dark" target="_blank">View on Itch</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Card 6 -->
-            <div class="mb-5">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <video id="snake_video" class=" auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                            <source src="videos/snake_video1.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Snake Simulation</h3>
-                            <div class="fs-6">
-                            <p>
-                            AI-driven snake simulation with A* pathfinding for autonomous navigation.
-                            Uses a linked list for tail segments. Includes a player-controlled mode.
-                            </p>
-                            </div>
-                            <a href="https://smk1302.itch.io/snake" class="btn btn-sm btn-outline-secondary" target="_blank">View on Itch</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
+        <!-- Section Header -->
+        <div class="container-media px-3 mt-5 pt-4">
             <hr class="my-1">
-            <h2 id="previous-work" class="display-7 fw-light mb-4">Technical Art</h2>
+            <p id="previous-work" class="h2 font-tertiary mb-4">Technical Art</p>
+        </div>
 
-
-            <!-- Card 7 -->
-            <div class="mb-5">
-                <div class="row g-0">
-
-                    <div class="col-md-6">
-                        <video id="rigging_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img//Thumbnails/ElectroBlast_v1_frame_at_0m2s.jpg">
-                            <source src="videos/ElectroBlast_v1.mov" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Laser Blast FX</h3>
-                            <div class="fs-6">
-                            <p>
-                                Rigid body destruction simulation in Houdini—dynamic laser impacts triggering debris,
-                                particles, and smoke. Based on Steven Knipping's Applied Houdini series.
-                            </p>
-                            </div>
-                            <!-- <a href="" class="btn btn-sm btn-outline-secondary" target="_blank">Watch on Youtube</a> -->
-                        </div>
-                    </div>
-
+        <!-- Card 7 (two-column with video) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <video id="rigging_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/Electroblast_v1.png">
+                        <source src="videos/ElectroBlast_v1.mov" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Laser Blast FX</h2>
+                    <p class="body-text">
+                        Rigid body destruction simulation in Houdini—dynamic laser impacts triggering debris,
+                        particles, and smoke. Based on Steven Knipping's Applied Houdini series.
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- Card 8 -->
-            <div class="mb-5">
-                <div class="row g-0">
-
-                    <div class="col-md-6">
-                        <video id="head_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/simon-kramer-louheadscan-1_edited.jpg">
-                            <source src="videos/lou-hex-rig-v1-edited.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Photogrammetry</h3>
-                            <div class="fs-6">
-                            <p>
-                                Head model created with single camera photogrammetry and retopologized in Wrap3.
-                                Facial rig based on the Facial Action Coding System (FACS).
-                            </p>
-                            </div>
-                            <!-- <a href="https://www.artstation.com/artwork/6NPZ90" class="btn btn-sm btn-outline-secondary" target="_blank">View on ArtStation</a> -->
-                        </div>
-                    </div>
-
+        <!-- Card 8 (two-column with video) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <video id="head_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/simon-kramer-louheadscan-1_edited.jpg">
+                        <source src="videos/lou-hex-rig-v1-edited.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Photogrammetry</h2>
+                    <p class="body-text">
+                        Head model created with single camera photogrammetry and retopologized in Wrap3.
+                        Facial rig based on the Facial Action Coding System (FACS).
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- Card 9 -->
-            <div class="mb-5">
-                <div class="row g-0">
-
-                    <div class="col-md-6">
-                        <video id="rigging_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/asari_thumbnail_16-9.png">
-                            <source src="videos/Rigging_Reel_2023.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Rigging</h3>
-                            <div class="fs-6">
-                            <p>
-                            Character and mechanical rigging with a focus on clean deformations and proper skinning.
-                            </p>
-                            </div>
-                            <!-- <a href="https://www.youtube.com/watch?v=r-erg-8K7us" class="btn btn-sm btn-outline-secondary" target="_blank">Watch on Youtube</a> -->
-                        </div>
-                    </div>
-
+        <!-- Card 9 (two-column with video) -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <video id="rigging_video_2" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/asari_thumbnail_16-9.png">
+                        <source src="videos/Rigging_Reel_2023.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-primary">Rigging</h2>
+                    <p class="body-text">
+                        Character and mechanical rigging with a focus on clean deformations and proper skinning.
+                    </p>
                 </div>
             </div>
-
-
-
-
-            <!-- Card 10 -->
-            <!-- <div class="mb-5">
-                <div class="row g-0">
-
-                    <div class="col-md-6 pb-md-3">
-                        <div id="carouselExample1" class="carousel slide">
-
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExample1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExample1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            </div>
-                            
-                            <div class="carousel-inner rounded-3">
-                                <div class="carousel-item active">
-                                    <img src="img/Thumbnails/TravelingShrine_16-9.jpg" class="d-block w-100" alt="Project image 1" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/Thumbnails/skulltotem_16-9.jpg" class="d-block w-100" alt="Project image 2" style="aspect-ratio: 16 / 9; object-fit: cover;">
-                                </div>
-                            </div>
-                            
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="py-2 px-0 ps-md-3 py-md-0">
-                            <h3 class="fw-semibold">Prop Modeling</h3>
-                            <div class="fs-6">
-                            <p>
-                                Prop models created at CGMA (2023).
-                                Focus on production modeling techniques and UV unwrapping.
-                            </p>
-                            </div>
-                            <a href="https://www.artstation.com/simonkramer/albums/10998200" class="btn btn-sm btn-outline-secondary" target="_blank">View on ArtStation</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
-
-            <hr class="my-5">
-
-
         </div>
 
         <!-- Contact Section -->
-        <div id="contact" class="container mb-5 px-3" style="max-width: 768px;">
-            <div class="text-center py-5 px-3 rounded-3" style="background-color: rgba(212, 207, 191, 0.5);">
-
-                <h2 class="mb-3">Get in Touch</h2>
+        <div id="contact" class="container-media px-3" style="padding-top: 4rem; padding-bottom: 5rem;">
+            <!-- <hr class="mb-5"> -->
+            <div class="text-center">
                 
                 <!-- Email -->
                 <div class="mb-4">
-                    <!-- <h5>Email</h5> -->
-                    <a href="mailto:kramer.simon.m@gmail.com" class="text-decoration-none text-dark email-link lead">
-                        kramer.simon.m@gmail.com
-                    </a>
+                    <a href="mailto:kramer.simon.m@gmail.com" class="display-6 email-link">kramer.simon.m@gmail.com</a>
                 </div>
                 
                 <!-- Social Links -->
-                <div>
-                    <!-- <h5 class="mb-3">Connect with me</h5> -->
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="https://www.linkedin.com/in/simon-m-kramer/" class="btn btn-dark" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/simon-m-kramer" class="btn btn-outline-dark" target="_blank">GitHub</a>
-                    </div>
+                <div class="d-flex justify-content-center gap-4 flex-wrap">
+                    <a href="https://www.linkedin.com/in/simon-m-kramer/" class="btn btn-dark btn-lg" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/simon-m-kramer" class="btn btn-outline-dark btn-lg" target="_blank">GitHub</a>
                 </div>
+                
             </div>
         </div>
 
@@ -419,37 +302,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark py-4">
-        <div class="container px-3" style="max-width: 768px;">
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0 text-white-50">&copy; 2026 Simon Kramer</p>
-                <div>
-                    <a href="https://www.linkedin.com/in/simon-m-kramer/" class="text-decoration-none pe-4" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=#adb5bd class="bi bi-linkedin"
-                            viewBox="0 0 16 16">
-                            <title>LinkedIn</title>
-                            <path
-                                d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
-                        </svg>
-                    </a>
-                    <a href="https://github.com/simon-m-kramer" class="text-decoration-none pe-4" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=#adb5bd class="bi bi-github"
-                            viewBox="0 0 16 16">
-                            <title>GitHub</title>
-                            <path
-                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-                        </svg>
-                    </a>
-                    <a href="mailto:kramer.simon.m@gmail.com" class="text-decoration-none" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=#adb5bd class="bi bi-envelope"
-                            viewBox="0 0 16 16">
-                            <title>Email</title>
-                            <path
-                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <p class="mb-0 text-white-50 text-center">&copy; 2026 Simon Maximilian Kramer</p>
     </footer>
 
     <!-- Bootstrap JavaScript -->
