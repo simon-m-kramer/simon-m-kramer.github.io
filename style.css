@@ -15,6 +15,23 @@ body {
     font-family: 'Barlow', sans-serif;
 }
 
+/* Hacky way of changing small breakpoint from 768px to 700px for col-md-6 */
+@media (max-width: 699.98px) {
+    .col-md-6 {
+        width: 100%;
+    }
+}
+@media (min-width: 700px) {
+    .col-md-6 {
+        width: 50%;
+    }
+}
+
+.page-nav a {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.1rem;
+}
+
 /* Remove the focus outline from the navbar toggler */
 .navbar-toggler:focus {
     box-shadow: none;
