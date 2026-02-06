@@ -83,7 +83,7 @@
                 ThorAbilitySystemComponent doesn't require any implementation to get started.
                 GAS also relies on Gameplay Tags, which prove useful for all kinds of implementations beyond GAS itself.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAbilityInputID" aria-expanded="false" aria-controls="codeSnippetAbilityInputID">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -129,7 +129,7 @@
                 This happens in two places: PreAttributeChange clamps the value before it's queried, ensuring valid reads.
                 PostGameplayEffectExecute clamps the actual base value after a gameplay effect is applied.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttributeSet" aria-expanded="false" aria-controls="codeSnippetAttributeSet">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -222,7 +222,7 @@
                 I set up custom OnHealthChange and OnStaminaChange delegates
                 on ThorCharacter and tie them to their respective GAS delegates.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCharacter" aria-expanded="false" aria-controls="codeSnippetCharacter">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -303,7 +303,7 @@
                 which prevented animation canceling from working.
                 TryActivateAbility, on the other hand, handles this correctly.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetPlayerCharacter" aria-expanded="false" aria-controls="codeSnippetPlayerCharacter">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -372,7 +372,7 @@
                 The gameplay ability's CanActivateAbility function (which I extend)
                 then checks whether we're performing a blocked ability and, if so, whether the cancel tag is present.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetCancellable" aria-expanded="false" aria-controls="codeSnippetCancellable">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -421,7 +421,7 @@
                 My implementation checks the animation montage—if it contains different sections,
                 it's automatically recognized as a combo sequence.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetAttack" aria-expanded="false" aria-controls="codeSnippetAttack">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
@@ -561,7 +561,7 @@
                 limited to a custom interaction channel, then apply a dot product filter to identify
                 the object directly in front of the player while also factoring in distance.
             </p>
-            <div class="mb-5 pb-3">
+            <div class="mb-5">
                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#codeSnippetInteraction" aria-expanded="false" aria-controls="codeSnippetInteraction">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
                         <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
