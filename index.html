@@ -55,66 +55,41 @@
             </div>
         </div>
 
-        <!-- Featured Card -->
+        <!-- Card Racing Game -->
         <div class="mb-5 pb-3" id="featured">
             <div class="container-media px-3 mb-3">
-                <video id="asgard_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                    <source src="videos/Asgard_video1.mp4" type="video/mp4">
+                <video id="asgard_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls poster="img/Thumbnails/Car_Racing_Thumbnail_1.png">
+                    <source src="videos/Car_Racing_Demo_2.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="container-text px-3">
                 <div class="d-flex align-items-center gap-3 mb-2">
-                    <h2 class="h1 font-emphasis-1 mb-0">Souls-like Viking RPG</h2>
+                    <h2 class="h1 font-emphasis-1 mb-0">Car Racing Game</h2>
                     <span class="badge bg-success">Featured</span>
                 </div>
                 <p class="body-text">
-                    My graduation project at Futuregames, built in C++ with Unreal Engine.
-                    The focus is responsive combat using Unreal's Gameplay Ability System (GAS)—combining clean code architecture 
-                    with an understanding of how animations need to be authored for tight gameplay feel.
-                    Work in progress.
+                    AI-driven car that follows a precalculated racing spline using Unreal Engine's physics system.
+                    Uses my stack-based FSM plugin (see below) to switch between states: driving, overtaking, follow safely, and more.
                 </p>
-                <a href="feature.html" class="btn btn-dark">Learn More</a>
             </div>
         </div>
 
-        <!-- Card Racing Game -->
+        <!-- Viking -->
         <div class="container-media px-3 mb-5 pb-3">
             <div class="row g-3">
                 <div class="col-md-6">
                     <video id="synty_video" class="auto-reload-video w-100 rounded-3" style="aspect-ratio: 16 / 9; object-fit: cover;" controls>
-                        <source src="videos/CarRacingGameDemo_v1.mp4" type="video/mp4">
+                        <source src="videos/Asgard_video1.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="col-md-6">
-                    <h3 class="h2 font-emphasis-1">Car Racing Game</h3>
+                    <h3 class="h2 font-emphasis-1">Souls-like Viking RPG</h3>
                     <p class="body-text">
-                    AI-driven car that follows a precalculated racing spline using Unreal Engine's physics system.
-                    Uses my stack-based FSM plugin (see below) to switch between states: driving, overtaking, sprinting, and more.
-                    The demo video shows me driving behind the AI car. Work in progress.
+                        Focus on responsive combat using Unreal's Gameplay Ability System (GAS)—combining clean code architecture 
+                        with an understanding of how animations need to be authored for tight gameplay feel.
+                        Work in progress.
                     </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card Action Stack -->
-        <div class="container-media px-3 mb-5 pb-3">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center justify-content-center rounded-3" 
-                        style="background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%); aspect-ratio: 16 / 9;">
-                        <div class="text-center text-white p-4">
-                            <h2 class="display-5 fw-bold mb-2">Action Stack</h2>
-                            <p class="h5 fw-light">Plugin for Unreal Engine</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h2 class="h2 font-emphasis-1">Stack-based FSM</h2>
-                    <p class="body-text"> 
-                        Originally developed by Carl Granberg for Unity/C#,
-                        ported and redesigned as a composable UObject for Unreal Engine.
-                    </p>
-                    <a href="https://github.com/simon-m-kramer/Bifrost" class="btn btn-dark" target="_blank">View on GitHub</a>
+                    <a href="feature.html" class="btn btn-dark">Learn More</a>
                 </div>
             </div>
         </div>
@@ -181,6 +156,29 @@
                         and fellow programmers using Perforce.
                     </p>
                     <a id="dynamicLink" href="https://futuregames.itch.io/gunsmoke-grimoires" class="btn btn-dark" target="_blank">View Selected on Itch</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Action Stack -->
+        <div class="container-media px-3 mb-5 pb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" 
+                        style="background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%); aspect-ratio: 16 / 9;">
+                        <div class="text-center text-white p-4">
+                            <h2 class="display-5 fw-bold mb-2">Action Stack</h2>
+                            <p class="h5 fw-light">Plugin for Unreal Engine</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h2 font-emphasis-1">Stack-based FSM</h2>
+                    <p class="body-text"> 
+                        Originally developed by Carl Granberg for Unity/C#,
+                        ported and redesigned as a composable UObject for Unreal Engine.
+                    </p>
+                    <a href="https://github.com/simon-m-kramer/Bifrost" class="btn btn-dark" target="_blank">View on GitHub</a>
                 </div>
             </div>
         </div>
